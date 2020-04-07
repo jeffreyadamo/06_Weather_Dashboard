@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <h1>Weather Dashboard</h1>
+    </nav>
+    <main class="container-fluid">
+      <div class="row">
+        <aside class="col-md-3">
+          <form class="row">
+            <div class="col-md-12 form-group">
+              <label for="citySearch">
+                <h4>Search for a City:</h4>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="citySearch"
+                aria-describedby="emailHelp"
+              />
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
+          <hr />
+          <div class="cityAside">
+            <ul class="list-group">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+              <li class="list-group-item">Porta ac consectetur ac</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+          </div>
+        </aside>
+
+        <article class="col-md-9">
+          <div class="row borderThis">
+            <div class="col-md-12">
+              <div class="row cityDate">
+                <h2>City (M/DD/YYYY)</h2>
+              </div>
+              <div class="row cityTemp">
+                Temperature: ### F
+              </div>
+              <div class="row cityHum">
+                Humidity: ##%
+              </div>
+              <div class="row cityWindSpeed">
+                Wind Speed: ##.# MPH
+              </div>
+              <div class="row cityUV">
+                UV Index: [colorCoded]
+              </div>
+            </div>
+          </div>
+
+          <div class="row forecast">
+            <h3>5-Day Forecast:</h3>
+          </div>
+
+
+          <div class="row forecastCards">
+            <div class="col pl-0">
+              <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">M/DD/YYYY</h5>
+                  <img class="pic1" src=#/>
+                  <p class="card-text cardTemp">
+                    Temp: ##.## F
+                  </p>
+                  <p class="card-text cardHum">
+                   Humidity: ##%
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">M/DD/YYYY</h5>
+                      <img class="pic1" src=#/>
+                      <p class="card-text cardTemp">
+                        Temp: ##.## F
+                      </p>
+                      <p class="card-text cardHum">
+                       Humidity: ##%
+                      </p>
+                    </div>
+                  </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">M/DD/YYYY</h5>
+                      <img class="pic1" src=#/>
+                      <p class="card-text cardTemp">
+                        Temp: ##.## F
+                      </p>
+                      <p class="card-text cardHum">
+                       Humidity: ##%
+                      </p>
+                    </div>
+                  </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">M/DD/YYYY</h5>
+                      <img class="pic1" src=#/>
+                      <p class="card-text cardTemp">
+                        Temp: ##.## F
+                      </p>
+                      <p class="card-text cardHum">
+                       Humidity: ##%
+                      </p>
+                    </div>
+                  </div>
+            
+            </div>
+            <div class="col">
+                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">M/DD/YYYY</h5>
+                      <img class="pic1" src=#/>
+                      <p class="card-text cardTemp">
+                        Temp: ##.## F
+                      </p>
+                      <p class="card-text cardHum">
+                       Humidity: ##%
+                      </p>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
