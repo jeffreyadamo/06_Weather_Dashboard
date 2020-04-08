@@ -6,6 +6,9 @@ h1 {
 article{
     margin: 15px 0 0 0;
 }
+.rightColumn{
+    padding-left: 30px;
+}
 
 .borderThis{
     border-style: solid none solid solid;
@@ -49,3 +52,8 @@ p {
     border-color: purple;
     
 }
+
+.card-body {
+    padding: 10px;
+}
+

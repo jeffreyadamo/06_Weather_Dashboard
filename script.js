@@ -34,7 +34,7 @@ $.ajax({
   var dt = date.getDate();
   var month = date.getMonth();
   var year = date.getFullYear();
-  var dateFormatted = dt + "/" + month + "/" + year;
+  var dateFormatted =  month + "/" + dt + "/" + year;
   console.log("dateFormatted is: " + dateFormatted);
 
   //Weather Icon:
@@ -97,7 +97,7 @@ $.ajax({
     // //Insert icon:
     // $("#icon").attr("src", currentData.iconNow);
 
-    // is this done better with an array?
+    // is this done better with an array? maybe.
 
     var dataArray = [
       currentCity,
@@ -164,19 +164,56 @@ $.ajax({
     console.log(response.list[39]);
 
     //Date: Figuring out how to reformat the date
-    console.log("current ISO date is: " + response.list[0].dt_txt);
-    var dateISO = response.list[0].dt_txt;
-    var date = new Date(dateISO);
-    var dt = date.getDate();
-    var month = date.getMonth();
-    var year = date.getFullYear();
-    var dateFormatted = dt + "/" + month + "/" + year;
-    console.log("dateFormatted is: " + dateFormatted);
+    // console.log("current ISO date is: " + response.list[0].dt_txt);
+    // var dateISO = response.list[0].dt_txt;
+    // var date = new Date(dateISO);
+    // var dt = date.getDate();
+    // var month = date.getMonth();
+    // var year = date.getFullYear();
+    // var dateFormatted = month + "/" + dt + "/" + year;
+    // console.log("dateFormatted is: " + dateFormatted);
 
-    //Current Temperature: 1 sigFigs
-    console.log("current temp is ");
+    //In OWM Forecast API, each object property is a 3 hour increase, so 8*3=24 hours from now. Create an array representing the next 5 days in hours of 3:
+    var forDay = [8,16,24,32,39];
 
-    //Current Humidity: 0 sigFigs
+    for (var d=0 ; d < forDay.length; d++) {
+
+        //Start with Date:
+        var dateISO = response.list[forDay[d]].dt_txt;
+        var date = new Date(dateISO);
+        var dt = date.getDate();
+        var month = date.getMonth();
+        var year = date.getFullYear();
+        var dateFormatted = month + "/" + dt + "/" + year;
+        // console.log("dateFormatted is: " + dateFormatted);
+        console.log(forDay[d])
+
+        // //Weather Icon:
+        var nextIcon = response.list[forDay[d]].weather[0].icon;
+        var nextIconURL =
+            "http://openweathermap.org/img/w/" + nextIcon + ".png";
+
+
+        //Forcasted Temperature: comes as 2 sigFigs
+        var tempNext = response.list[forDay[d]].main.temp;
+        console.log("tempNext is " + tempNext);
+
+        //Forecasted Humidity: 0 sigFigs
+        var humNext = response.list[forDay[d]].main.humidity;
+
+
+        $(".forDate"+d).append(dateFormatted);
+        $(".forTemp"+d).prepend("Temp: "+ tempNext+"&nbsp;");
+        $(".forHum"+d).append(humNext+ "%");
+        $(".forIcon"+d).attr("src", nextIconURL);
+
+    }
+
+    
+  
+    
+
+
 
     //Current Wind Speed: 1 sigFig
   });

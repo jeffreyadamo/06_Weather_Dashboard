@@ -20,30 +20,34 @@
   </head>
 
   <body>
+<!-- Header  -->
     <nav class="navbar navbar-dark bg-dark">
       <h1>Weather Dashboard</h1>
     </nav>
+<!-- Place all the rest of the body in a container -->
     <main class="container-fluid">
       <div class="row">
+
         <aside class="col-md-3">
           <form class="row">
             <div class="col-md-12 form-group">
               <label for="citySearch">
                 <h4>Search for a City:</h4>
               </label>
+              <!-- Input of Button here -->
               <input
                 type="text"
                 class="form-control"
-                id="citySearch"
+                id="citySearch" 
                 aria-describedby="emailHelp"
               />
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" id="clickedButton">
                 <i class="fas fa-search"></i>
               </button>
             </div>
           </form>
-          <hr />
-          <div class="cityAside">
+
+          <div class="recentCities">
             <ul class="list-group">
               <li class="list-group-item">Cras justo odio</li>
               <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -54,7 +58,7 @@
           </div>
         </aside>
 
-        <article class="col-md-9">
+        <article class="col-md-9 rightColumn">
           <div class="row borderThis">
             <div class="col-md-12">
               <div class="row">
@@ -86,13 +90,11 @@
             <div class="col pl-0">
               <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title">M/DD/YYYY</h5>
-                  <img class="pic1" src=#/>
-                  <p class="card-text cardTemp">
-                    Temp: ##.## F
-                  </p>
-                  <p class="card-text cardHum">
-                   Humidity: ##%
+                  <h5 class="card-title forDate0"></h5></h5>
+                  <img class="forIcon0"/>
+                  <p class="card-text forTemp0">&#8457</p>
+                  <p class="card-text forHum0"><br>
+                   Humidity:
                   </p>
                 </div>
               </div>
@@ -100,13 +102,11 @@
             <div class="col">
                 <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                     <div class="card-body">
-                      <h5 class="card-title">M/DD/YYYY</h5>
-                      <img class="pic1" src=#/>
-                      <p class="card-text cardTemp">
-                        Temp: ##.## F
-                      </p>
-                      <p class="card-text cardHum">
-                       Humidity: ##%
+                      <h5 class="card-title forDate1"></h5></h5>
+                      <img class="forIcon1"/>
+                      <p class="card-text forTemp1">&#8457</p>
+                      <p class="card-text forHum1"><br>
+                       Humidity:
                       </p>
                     </div>
                   </div>
@@ -114,13 +114,11 @@
             <div class="col">
                 <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                     <div class="card-body">
-                      <h5 class="card-title">M/DD/YYYY</h5>
-                      <img class="pic1" src=#/>
-                      <p class="card-text cardTemp">
-                        Temp: ##.## F
-                      </p>
-                      <p class="card-text cardHum">
-                       Humidity: ##%
+                      <h5 class="card-title forDate2"></h5></h5>
+                      <img class="forIcon2"/>
+                      <p class="card-text forTemp2">&#8457</p>
+                      <p class="card-text forHum2"><br>
+                       Humidity:
                       </p>
                     </div>
                   </div>
@@ -128,13 +126,11 @@
             <div class="col">
                 <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                     <div class="card-body">
-                      <h5 class="card-title">M/DD/YYYY</h5>
-                      <img class="pic1" src=#/>
-                      <p class="card-text cardTemp">
-                        Temp: ##.## F
-                      </p>
-                      <p class="card-text cardHum">
-                       Humidity: ##%
+                      <h5 class="card-title forDate3"></h5></h5>
+                      <img class="forIcon3"/>
+                      <p class="card-text forTemp3">&#8457</p>
+                      <p class="card-text forHum3"><br>
+                       Humidity:
                       </p>
                     </div>
                   </div>
@@ -143,13 +139,11 @@
             <div class="col">
                 <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                     <div class="card-body">
-                      <h5 class="card-title">M/DD/YYYY</h5>
-                      <img class="pic1" src=#/>
-                      <p class="card-text cardTemp">
-                        Temp: ##.## F
-                      </p>
-                      <p class="card-text cardHum">
-                       Humidity: ##%
+                      <h5 class="card-title forDate4"></h5></h5>
+                      <img class="forIcon4"/>
+                      <p class="card-text forTemp4">&#8457</p>
+                      <p class="card-text forHum4"><br>
+                       Humidity:
                       </p>
                     </div>
                   </div>
