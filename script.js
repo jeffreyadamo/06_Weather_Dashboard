@@ -117,11 +117,25 @@ $.ajax({
     $(".cityHum").append(dataArray[4] + "%");
     $(".cityWindSpeed").append(dataArray[5] + " MPH");
     $(".cityUV").append(dataArray[6]);
+    // $(".cityUV").addClass("btn btn-primary cityUVstyle purple")
 
     //need to write a function to assign color style class to uvIndex for severity//
 
+    function UVindexing(event){
+    if (event < 3){
+        $(".cityUV").addClass("btn btn-success cityUVstyle");
+    } else if (event < 6){
+        $(".cityUV").addClass("btn btn-warning cityUVstyle");
+    } else if (event < 8){
+        $(".cityUV").addClass("btn btn-warning orange cityUVstyle");
+    } else if (event < 11){
+        $(".cityUV").addClass("btn btn-danger cityUVstyle");
+    } else if (event > 11){
+        $(".cityUV").addClass("btn btn-danger purple cityUVstyle");
+    }}
+    UVindexing(dataArray[6]);
 
-    
+
   });
 });
 

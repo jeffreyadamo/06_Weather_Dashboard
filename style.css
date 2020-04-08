@@ -33,3 +33,19 @@ h3{
 p {
     margin-bottom: 0px;
 }
+.cityUVstyle {
+    line-height: 0;
+    margin: 5px 0px 5px 10px;
+    padding-top: 18px;
+}
+
+.orange {
+    background-color: orange;
+    border-color: orange;
+    color: black;
+}
+.purple {
+    background-color: purple;
+    border-color: purple;
+    
+}
