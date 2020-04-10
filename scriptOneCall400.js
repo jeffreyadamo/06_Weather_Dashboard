@@ -1,15 +1,11 @@
 //Set variables here
 
-// One first loading, want to display the weather and forecast for a city
-// Start with Seattle:
+//One first loading, want to call up last searched item
+// During dev, lets use Seattle:
 // var storedCity = "Seattle";
 
 var storedCity = JSON.parse(localStorage.getItem("citySearched"));
 console.log(storedCity);
-
-if (storedCity === null){
-    storedCity = "Seattle";
-}
 
 APIcall(storedCity);
 $(".list-group").prepend("<li class='list-group-item searchedCities'>"+storedCity+"</li>")
@@ -20,10 +16,6 @@ $("#clickedButton").on("click", function(event) {
     console.log("click");
     var city = $("#citySearch").val();
     console.log(city);
-    
-    // To prevent running anyfurther, any clicks with no values in the search input shouldn't do anything; prevents from appending boxes on the left aside bar:
-    if(city === ""){return};
-
     APIcall(city);
     $(".list-group").prepend("<li class='list-group-item searchedCities'>"+city+"</li>")
 
@@ -52,7 +44,8 @@ function APIcall(city){
     console.log("Current Weather data for " + city);
 
     var currentqueryURL =
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?" +
+    "q=" +
     city +
     "&units=imperial&appid=" +
     APIKey;
@@ -122,7 +115,9 @@ function APIcall(city){
         console.log("UV Index is: " + uvIndex);
         //After UVIndex API call, we have access to scope of all variables, including UV Index.
 
-        // We can now put them in an object.
+        // All variables are defined. 
+        
+        // One option is to put all the variables in an object and query the properties.
         // var currentData = {
         //   cityNow: currentCity,
         //   dateNow: dateFormatted,
@@ -134,13 +129,12 @@ function APIcall(city){
         // };
         // console.log(currentData);
 
-        // //Insert object data into HTML:
+        // //Inserting the object data into HTML is pretty verbose and cumbersome:
         // $("#cityDate").text(currentData.cityNow + " (" + currentData.dateNow + ")");
-
         // //Insert icon:
         // $("#icon").attr("src", currentData.iconNow);
 
-        // is this done better with an array? maybe.
+        // By setting the variables as an array, the index can be called pretty quickly:
 
         var dataArray = [
         currentCity,
@@ -178,8 +172,8 @@ function APIcall(city){
         UVindexing(dataArray[6]);
 
 
+       
         });
-    
 
         //ForeCasted Data
         // var queryURL =
@@ -188,10 +182,11 @@ function APIcall(city){
         // "&units=imperial&appid=" +
         // APIKey;
         // console.log(queryURL);
-        ////////////////////////////////////////////////////////////
+
         //Using OWM One Call API, I realize it has all the previous information in one API call. It seems like instead of 3 API calls, this could be simplified into one API call. 
 
         var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" +lon+ "&units=imperial&appid="+ APIKey;
+
         //Setup AJAX call:
         $.ajax({
         url: queryURL,
@@ -200,13 +195,6 @@ function APIcall(city){
 
     //Store the retrived data inside an object called "response"
     .then(function (response) {
-        // console.log(response);
-        // console.log(response.list[0]);
-        // console.log(response.list[8]);
-        // console.log(response.list[16]);
-        // console.log(response.list[24]);
-        // console.log(response.list[32]);
-        // console.log(response.list[39]);
         console.log(response);
         console.log(response[1]);
         console.log(response[2]);
@@ -225,88 +213,37 @@ function APIcall(city){
         // console.log("dateFormatted is: " + dateFormatted);
 
         //In OWM Forecast API, each object property is a 3 hour increase, so 8*3=24 hours from now. Create an array representing the next 5 days in hours of 3:
+        var forDay = [1,2,3,4,5];
 
-        ///////////////////////OLD THAT WORKS
-        // var forDay = [8,16,24,32,39];
+        for (var d=0 ; d < forDay.length; d++) {
 
-        // for (var d=0 ; d < forDay.length; d++) {
+            //Start with Date:
+            var dateISO = response.daily[d].dt;
+            var date = new Date(dateISO);
+            var dt = date.getDate();
+            var month = date.getMonth() +1; //again, why +1?
+            var year = date.getFullYear();
+            var dateFormatted = month + "/" + dt + "/" + year;
+            console.log(d)
 
-        //     //Start with Date:
-        //     var dateISO = response.list[forDay[d]].dt_txt;
-        //     var date = new Date(dateISO);
-        //     var dt = date.getDate();
-        //     var month = date.getMonth() +1; //again, why +1?
-        //     var year = date.getFullYear();
-        //     var dateFormatted = month + "/" + dt + "/" + year;
-        //     console.log(forDay[d])
-
-        //     // //Weather Icon:
-        //     var nextIcon = response.list[forDay[d]].weather[0].icon;
-        //     var nextIconURL =
-        //         "http://openweathermap.org/img/w/" + nextIcon + ".png";
+            // //Weather Icon:
+            var nextIcon = response.daily[d].weather[0].icon;
+            var nextIconURL =
+                "http://openweathermap.org/img/w/" + nextIcon + ".png";
 
 
-        //     //Forcasted Temperature: comes as 2 sigFigs
-        //     var tempNext = response.list[forDay[d]].main.temp;
-        //     console.log("tempNext is " + tempNext);
+            //Forcasted Temperature: comes as 2 sigFigs
+            var tempNext = response.daily[d].temp.max;
+            console.log("tempNext is " + tempNext);
 
-        //     //Forecasted Humidity: 0 sigFigs
-        //     var humNext = response.list[forDay[d]].main.humidity;
-
-
-        //     $(".forDate"+d).text(dateFormatted);
-        //     $(".forTemp"+d).html("Temp: "+ tempNext+"&nbsp;" + "<div id='fahr'>&#8457</div>");
-        //     $(".forHum"+d).html("<br>"+"Humidity: " + humNext+ "%");
-        //     $(".forIcon"+d).attr("src", nextIconURL);
+            //Forecasted Humidity: 0 sigFigs
+            var humNext = response.daily[d].weather.humidity;
 
 
-
-            /////////////////////////////////////////////////
-
-            var forDay = [1,2,3,4,5];
-
-            for (var d=0 ; d < forDay.length; d++) {
-                
-                //Start with Date:
-                // var dateISO = response.daily[d].dt;
-                // var date = new Date(dateISO);
-                // var dt = date.getDate();
-                // var month = date.getMonth() +1; //again, why +1?
-                // var year = date.getFullYear();
-                // var dateFormatted = month + "/" + dt + "/" + year;
-                // console.log(d)
-
-                var unix_timestamp = response.daily[d+1].dt;
-                console.log("unix_timestamp is: " + unix_timestamp);
-                var date = new Date(unix_timestamp * 1000);
-                console.log("unix date is: " + date);
-                var dt = date.getDate();
-                var month = date.getMonth() + 1; //Why does this need  +1?
-                var year = date.getFullYear();
-                var dateFormatted =  month + "/" + dt + "/" + year;
-                console.log("dateFormatted is: " + dateFormatted);
-    
-                // //Weather Icon:
-                var nextIcon = response.daily[d+1].weather[0].icon;
-                var nextIconURL =
-                    "http://openweathermap.org/img/w/" + nextIcon + ".png";
-    
-    
-                //Forcasted Temperature: comes as 2 sigFigs
-                var tempNext = response.daily[d+1].temp.max;
-                console.log("tempNext is " + tempNext);
-    
-                //Forecasted Humidity: 0 sigFigs
-                var humNext = response.daily[d+1].humidity;
-                console.log(humNext);
-    
-    
-                $(".forDate"+d).text(dateFormatted);
-                $(".forTemp"+d).html("Temp: "+ tempNext+"&nbsp;" + "<div id='fahr'>&#8457</div>");
-                $(".forHum"+d).html("<br>"+"Humidity: " + humNext+ "%");
-                $(".forIcon"+d).attr("src", nextIconURL);
-
-                ///////////////////////////////////////
+            $(".forDate"+d).text(dateFormatted);
+            $(".forTemp"+d).html("Temp: "+ tempNext+"&nbsp;" + "<div id='fahr'>&#8457</div>");
+            $(".forHum"+d).html("<br>"+"Humidity: " + humNext+ "%");
+            $(".forIcon"+d).attr("src", nextIconURL);
 
         }
 
