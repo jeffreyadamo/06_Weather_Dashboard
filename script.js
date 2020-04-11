@@ -21,16 +21,18 @@ $("#clickedButton").on("click", function(event) {
     var city = $("#citySearch").val();
     console.log(city);
     
-    // To prevent running anyfurther, any clicks with no values in the search input shouldn't do anything; prevents from appending boxes on the left aside bar:
+    // To prevent from making an empty AJAX call, any clicks with no values in the search input shouldn't do anything; prevents from appending boxes on the left aside bar:
     if(city === ""){return};
+    // if(city === storedCity){return};  //ISSUE: Needs to recognize that smashing the city button won't initiate a reseach.
 
+    //Make a AJAX call using the defined variable "city"
     APIcall(city);
-    $(".list-group").prepend("<li class='list-group-item searchedCities'>"+city+"</li>")
-
-    //Local Storage
+    
+    //Send the city searched to Local Storage
     localStorage.setItem("citySearched", JSON.stringify(city));
 
-
+    //Add a list group item with the recently searched city to the aside on the html
+    $(".list-group").prepend("<li class='list-group-item searchedCities'>"+city+"</li>")
 
 
 })
@@ -117,8 +119,9 @@ function APIcall(city){
         method: "GET",
     })
     .then(function (UVresponse) {
-        console.log(UVresponse);
         uvIndex = UVresponse.value;
+        console.log(UVresponse);
+        
         console.log("UV Index is: " + uvIndex);
         //After UVIndex API call, we have access to scope of all variables, including UV Index.
 
@@ -200,13 +203,7 @@ function APIcall(city){
 
     //Store the retrived data inside an object called "response"
     .then(function (response) {
-        // console.log(response);
-        // console.log(response.list[0]);
-        // console.log(response.list[8]);
-        // console.log(response.list[16]);
-        // console.log(response.list[24]);
-        // console.log(response.list[32]);
-        // console.log(response.list[39]);
+ 
         console.log(response);
         console.log(response[1]);
         console.log(response[2]);
@@ -214,53 +211,7 @@ function APIcall(city){
         console.log(response[4]);
         console.log(response[5]);
 
-        //Date: Figuring out how to reformat the date
-        // console.log("current ISO date is: " + response.list[0].dt_txt);
-        // var dateISO = response.list[0].dt_txt;
-        // var date = new Date(dateISO);
-        // var dt = date.getDate();
-        // var month = date.getMonth();
-        // var year = date.getFullYear();
-        // var dateFormatted = month + "/" + dt + "/" + year;
-        // console.log("dateFormatted is: " + dateFormatted);
-
-        //In OWM Forecast API, each object property is a 3 hour increase, so 8*3=24 hours from now. Create an array representing the next 5 days in hours of 3:
-
-        ///////////////////////OLD THAT WORKS
-        // var forDay = [8,16,24,32,39];
-
-        // for (var d=0 ; d < forDay.length; d++) {
-
-        //     //Start with Date:
-        //     var dateISO = response.list[forDay[d]].dt_txt;
-        //     var date = new Date(dateISO);
-        //     var dt = date.getDate();
-        //     var month = date.getMonth() +1; //again, why +1?
-        //     var year = date.getFullYear();
-        //     var dateFormatted = month + "/" + dt + "/" + year;
-        //     console.log(forDay[d])
-
-        //     // //Weather Icon:
-        //     var nextIcon = response.list[forDay[d]].weather[0].icon;
-        //     var nextIconURL =
-        //         "http://openweathermap.org/img/w/" + nextIcon + ".png";
-
-
-        //     //Forcasted Temperature: comes as 2 sigFigs
-        //     var tempNext = response.list[forDay[d]].main.temp;
-        //     console.log("tempNext is " + tempNext);
-
-        //     //Forecasted Humidity: 0 sigFigs
-        //     var humNext = response.list[forDay[d]].main.humidity;
-
-
-        //     $(".forDate"+d).text(dateFormatted);
-        //     $(".forTemp"+d).html("Temp: "+ tempNext+"&nbsp;" + "<div id='fahr'>&#8457</div>");
-        //     $(".forHum"+d).html("<br>"+"Humidity: " + humNext+ "%");
-        //     $(".forIcon"+d).attr("src", nextIconURL);
-
-
-
+     
             /////////////////////////////////////////////////
 
             var forDay = [1,2,3,4,5];
@@ -268,14 +219,7 @@ function APIcall(city){
             for (var d=0 ; d < forDay.length; d++) {
                 
                 //Start with Date:
-                // var dateISO = response.daily[d].dt;
-                // var date = new Date(dateISO);
-                // var dt = date.getDate();
-                // var month = date.getMonth() +1; //again, why +1?
-                // var year = date.getFullYear();
-                // var dateFormatted = month + "/" + dt + "/" + year;
-                // console.log(d)
-
+     
                 var unix_timestamp = response.daily[d+1].dt;
                 console.log("unix_timestamp is: " + unix_timestamp);
                 var date = new Date(unix_timestamp * 1000);
@@ -305,6 +249,8 @@ function APIcall(city){
                 $(".forTemp"+d).html("Temp: "+ tempNext+"&nbsp;" + "<div id='fahr'>&#8457</div>");
                 $(".forHum"+d).html("<br>"+"Humidity: " + humNext+ "%");
                 $(".forIcon"+d).attr("src", nextIconURL);
+
+                
 
                 ///////////////////////////////////////
 
