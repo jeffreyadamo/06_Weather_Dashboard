@@ -181,11 +181,82 @@ function UVindexing(event){
 ```
 WHEN I view future weather conditions for that city
 THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
+```
+Using the AJAX call to OMW One Call API gives a response to forecast info. Variables for forecast info was in the daily property of the response. An array was setup to be able to write a for loop in order to query each of the next 5 days. The BootstrapCDN cards have classes for each variable so that we can insert the index of the for loop to assign data to each card:
+
+```javascript
+var forDay = [1,2,3,4,5];
+
+            for (var d=0 ; d < forDay.length; d++) {
+                
+                //Start with Date:
+     
+                var unix_timestamp = response.daily[d+1].dt;
+                console.log("unix_timestamp is: " + unix_timestamp);
+                var date = new Date(unix_timestamp * 1000);
+                console.log("unix date is: " + date);
+                var dt = date.getDate();
+                var month = date.getMonth() + 1; //Why does this need  +1?
+                var year = date.getFullYear();
+                var dateFormatted =  month + "/" + dt + "/" + year;
+                console.log("dateFormatted is: " + dateFormatted);
+    
+                // //Weather Icon:
+                var nextIcon = response.daily[d+1].weather[0].icon;
+                var nextIconURL =
+                    "http://openweathermap.org/img/w/" + nextIcon + ".png";
+    
+    
+                //Forcasted Temperature: comes as 2 sigFigs
+                var tempNext = response.daily[d+1].temp.max;
+                console.log("tempNext is " + tempNext);
+    
+                //Forecasted Humidity: 0 sigFigs
+                var humNext = response.daily[d+1].humidity;
+                console.log(humNext);
+    
+    
+                $(".forDate"+d).text(dateFormatted);
+                $(".forTemp"+d).html("Temp: "+ tempNext+"&nbsp;" + "<div id='fahr'>&#8457</div>");
+                $(".forHum"+d).html("<br>"+"Humidity: " + humNext+ "%");
+                $(".forIcon"+d).attr("src", nextIconURL);
+```
+
+```
 WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
+```
+
+The cities in the search history in the aside have an onclick event handler designed to take their value and run an APIcall function:
+
+```javascript
+//on click for searched cities:
+
+$(".list-group").on("click", function(event) {
+    console.log(event.target.innerHTML);
+    var asideCity = event.target.innerHTML;
+    APIcall(asideCity);
+})
+```
+
+```
 WHEN I open the weather dashboard
 THEN I am presented with the last searched city forecast
 ```
+```javascript
+// One first loading, display the weather and forecast for the last searched city.
+var storedCity = JSON.parse(localStorage.getItem("citySearched"));
+console.log(storedCity);
+
+//If the user doesn't have stored data (new user), display weather conditions for Seattle:
+if (storedCity === null){
+    storedCity = "Seattle";
+}
+
+APIcall(storedCity);
+```
+
+
 
 ## Issues:
 

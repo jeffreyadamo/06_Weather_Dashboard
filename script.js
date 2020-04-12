@@ -1,17 +1,14 @@
-//Set variables here
-
-// One first loading, want to display the weather and forecast for a city
-// Start with Seattle:
-// var storedCity = "Seattle";
-
+// One first loading, want to display the weather and forecast for the last searched city.
 var storedCity = JSON.parse(localStorage.getItem("citySearched"));
 console.log(storedCity);
 
+//If the user doesn't have stored data (new user), display weather conditions in for Seattle:
 if (storedCity === null){
     storedCity = "Seattle";
 }
 
 APIcall(storedCity);
+
 $(".list-group").prepend("<li class='list-group-item searchedCities'>"+storedCity+"</li>")
 
 //Write an onclick function to set the search form to the AJAX call:
