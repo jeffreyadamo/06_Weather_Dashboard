@@ -2,7 +2,8 @@
 
 ### Jeffrey Adamo  
 UW Full Stack BootCamp  
-Week 6 Homework: Server-Side APIs
+Week 6 Homework: Server-Side APIs  
+[Weather Dashboard](https://jeffreyadamo.github.io/06_Weather_Dashboard/)
 
 ## Objective
 
