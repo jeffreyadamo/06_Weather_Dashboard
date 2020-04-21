@@ -86,7 +86,7 @@ function APIcall(city) {
     var currentIcon = responseNow.weather[0].icon;
     console.log("weather icon code is: " + currentIcon);
     var currentIconURL =
-      "http://openweathermap.org/img/w/" + currentIcon + ".png";
+      " https://openweathermap.org/img/w/" + currentIcon + ".png";
 
     //Current Temp: 1 sigFig
     var currentTemp = responseNow.main.temp.toFixed(1); //toFixed(1) converts from 2 to 1 significant digit
@@ -109,7 +109,7 @@ function APIcall(city) {
     console.log("------------------");
 
     var queryURLuv =
-      "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+      "https://api.openweathermap.org/data/2.5/uvi?appid=" +
       APIKey +
       "&lat=" +
       lat +
@@ -208,7 +208,7 @@ function APIcall(city) {
           // //Weather Icon:
           var nextIcon = response.daily[d + 1].weather[0].icon;
           var nextIconURL =
-            "http://openweathermap.org/img/w/" + nextIcon + ".png";
+            "https://openweathermap.org/img/w/" + nextIcon + ".png";
 
           //Forcasted Temperature: comes as 2 sigFigs
           var tempNext = response.daily[d + 1].temp.max;
