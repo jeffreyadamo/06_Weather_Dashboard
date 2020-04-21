@@ -86,7 +86,7 @@ function APIcall(city) {
     var currentIcon = responseNow.weather[0].icon;
     console.log("weather icon code is: " + currentIcon);
     var currentIconURL =
-      " https://openweathermap.org/img/w/" + currentIcon + ".png";
+      "https://openweathermap.org/img/w/" + currentIcon + ".png";
 
     //Current Temp: 1 sigFig
     var currentTemp = responseNow.main.temp.toFixed(1); //toFixed(1) converts from 2 to 1 significant digit
