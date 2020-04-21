@@ -1,8 +1,19 @@
 # 06 Server-Side APIs: Weather Dashboard
 
-Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
+### Jeffrey Adamo  
+UW Full Stack BootCamp  
+Week 6 Homework: Server-Side APIs
 
-Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that will provide basic setup and usage instructions. Use `localStorage` to store any persistent data.
+## Objective
+
+Utilize the third-party API, [OpenWeather API](https://openweathermap.org/api) to build a weather dashboard to retrive weather data for cities. The dashboard will run in the browser and feature dynamically updated HTML and CSS
+
+CSS: [BootstrapCDN](https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css)
+
+JQuery: [Cloundfare](https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js)
+
+Font: [FontAwesome](https://use.fontawesome.com/releases/v5.8.1/css/all.css)
+
 
 ## User Story
 
@@ -11,6 +22,23 @@ AS A traveler
 I WANT to see the weather outlook for multiple cities
 SO THAT I can plan a trip accordingly
 ```
+
+## Demo:
+* User is greeted with current weather conditions and forecast for Seattle
+
+
+![Weather Dashbord](./Assets/weatherDashboard.png)
+
+* Page has a simple navigation bar that says, "Weather Dashboard"
+* Left aside contains search form and previously searched city
+* Main section displays current weather for Seattle, with date, weather icon and then rows containing data for Temperature, Humidity, Wind Speed, and UV Index
+* UV Index is color scaled based on severity
+* 5-Day Forecast contains cards with date, weather icon, Temp, and Humidity
+
+
+* When searching for a city, a new button for the searched city is prepended to the aside and when clicked on, will display city for that city again. When refreshed, the most recent searched city results will be displayed
+
+![demo](./Assets/weatherDashboard.gif)
 
 ## Acceptance Criteria
 
@@ -29,10 +57,6 @@ THEN I am again presented with current and future conditions for that city
 WHEN I open the weather dashboard
 THEN I am presented with the last searched city forecast
 ```
-
-The following image demonstrates the application functionality:
-
-![weather dashboard demo](./Assets/06-server-side-apis-homework-demo.png)
 
 ## Development Notes:
 ```
@@ -268,14 +292,3 @@ APIcall(storedCity);
     if(city === storedCity){return};  //ISSUE: Needs to recognize that smashing the city button won't initiate a re-search.
 ```
 ![re-search issue](./Assets/re_search.png)
-
-## Review
-
-You are required to submit the following for review:
-
-* The URL of the deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
